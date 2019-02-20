@@ -8,5 +8,5 @@ while (1) {
     Write-Host(Get-Process | 
             Where-Object { $_.mainWindowHandle -eq $hwnd } | 
             Select-Object processName, MainWindowTItle, MainWindowHandle).Tostring()
-    sleep -Milliseconds 200
+    Start-Sleep -Milliseconds 200
 }
