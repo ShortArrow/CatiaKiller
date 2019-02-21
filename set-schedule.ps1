@@ -13,9 +13,10 @@ if (($PSversionTable.PSVersion.Major -lt 5)) {
 #     return
 # }
 New-Item "C:\CatiaKiller" -ItemType Directory -Force
-Copy-Item "task-scheduler.js" "C:\CatiaKiller"
+Copy-Item "debug.cmd" "C:\CatiaKiller"
 Copy-Item "launch.cmd" "C:\CatiaKiller"
 Copy-Item "launch.lnk" "$env:userprofile\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
 Copy-Item "main.ps1" "C:\CatiaKiller"
-Copy-Item "set-schedule.ps1" "C:\CatiaKiller"
 Copy-Item "toast.ps1" "C:\CatiaKiller"
+Copy-Item "uninstall.cmd" "C:\CatiaKiller"
+Copy-Item "unset-schedule.ps1" "C:\CatiaKiller"
