@@ -10,8 +10,8 @@ if ($Debug) {
 }
 else {
     $TargetProcessName = "CNEXT"
-    $Split = 5
-    $WaitTime = 5
+    $Split = 90
+    $WaitTime = 900
 }
 $code = @'
     [DllImport("user32.dll")]
@@ -42,6 +42,7 @@ while (1) {
             }
             else {
                 Write-Output "Let's Kill" | Out-File -LiteralPath $LogFile -Append -Force
+                Get-Date | Out-File -LiteralPath $LogFile -Append -Force
             }
             if ($null -ne $TargetProcess) {
                 $TargetProcess.CloseMainWindow()| Out-Null
