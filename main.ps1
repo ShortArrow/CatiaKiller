@@ -1,13 +1,14 @@
 param (
     [switch]$Debug # オプション
 )
-$LogFile="\\192.168.0.170\supersub\Public Space\Installer【インストーラ】\CAD\CAD CATIA\KILLER\$env:COMPUTERNAME.log"
-Get-Date | Out-File -LiteralPath $LogFile -Force
+$LogFile = "\\192.168.0.170\supersub\Public Space\Installer【インストーラ】\CAD\CAD CATIA\KILLER\$env:COMPUTERNAME.log"
+Get-Date | Out-File -LiteralPath $LogFile -Append #-Force
 if ($Debug) {
     $TargetProcessName = "mspaint"
     $Split = 5
     $WaitTime = 5
-}else {
+}
+else {
     $TargetProcessName = "CNEXT"
     $Split = 90
     $WaitTime = 900
@@ -31,14 +32,16 @@ while (1) {
         $Count++
         if ($Debug) {
             Write-Host "$Count : $($ForeWindow.ProcessName)"
-        }else {
-            Write-Host "$Count : $($ForeWindow.ProcessName)" | Out-File $LogFile
+        }
+        else {
+            Write-Host "$Count : $($ForeWindow.ProcessName)" | Out-File  -LiteralPath $LogFile -Append 
         }
         if ($Count -eq $Split) {
             if ($Debug) {
                 Write-Host "Let's Kill"
-            }else {
-                Write-Host "Let's Kill" | Out-File $LogFile
+            }
+            else {
+                Write-Host "Let's Kill" | Out-File  -LiteralPath $LogFile -Append 
             }
             if ($null -ne $TargetProcess) {
                 $TargetProcess.CloseMainWindow()| Out-Null
@@ -53,8 +56,9 @@ while (1) {
         $TargetProcess = $ForeWindow
         if ($Debug) {
             Write-Host "$($ForeWindow.ProcessName) is Target"
-        }else {
-            Write-Host "$($ForeWindow.ProcessName) is Target" | Out-File $LogFile
+        }
+        else {
+            Write-Host "$($ForeWindow.ProcessName) is Target" | Out-File  -LiteralPath $LogFile -Append 
         }
     }
     Start-Sleep -Seconds ($WaitTime / $Split)
