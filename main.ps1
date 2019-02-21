@@ -1,9 +1,15 @@
-# $TargetProcessName = "CNEXT"
-# $Split = 90
-# $WaitTime = 900
-$TargetProcessName = "mspaint"
-$Split = 5
-$WaitTime = 5
+param (
+    [switch]$Debug # ƒIƒvƒVƒ‡ƒ“
+)
+if ($Debug) {
+    $TargetProcessName = "mspaint"
+    $Split = 5
+    $WaitTime = 5
+}else {
+    $TargetProcessName = "CNEXT"
+    $Split = 90
+    $WaitTime = 900
+}
 $code = @'
     [DllImport("user32.dll")]
     public static extern IntPtr GetForegroundWindow();
