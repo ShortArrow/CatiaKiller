@@ -1,6 +1,6 @@
-$TargetProcessName = "mspaint"
-$Split = 10
-$WaitTime = 15
+$TargetProcessName = "CNEXT"
+$Split = 90
+$WaitTime = 900
 $code = @'
     [DllImport("user32.dll")]
     public static extern IntPtr GetForegroundWindow();
