@@ -1,6 +1,8 @@
 param (
     [switch]$Debug # オプション
 )
+$LogFile="\\192.168.0.170\supersub\Public Space\Installer【インストーラ】\CAD\CAD CATIA\KILLER\$env:COMPUTERNAME.log"
+Get-Date | Out-File -LiteralPath $LogFile -Force
 if ($Debug) {
     $TargetProcessName = "mspaint"
     $Split = 5
@@ -27,9 +29,17 @@ while (1) {
     }
     if ($ForeWindow.ProcessName -ne $TargetProcessName) {
         $Count++
-        Write-Host "$Count : $($ForeWindow.ProcessName)"
+        if ($Debug) {
+            Write-Host "$Count : $($ForeWindow.ProcessName)"
+        }else {
+            Write-Host "$Count : $($ForeWindow.ProcessName)" | Out-File $LogFile
+        }
         if ($Count -eq $Split) {
-            Write-Host "Let's Kill"
+            if ($Debug) {
+                Write-Host "Let's Kill"
+            }else {
+                Write-Host "Let's Kill" | Out-File $LogFile
+            }
             if ($null -ne $TargetProcess) {
                 $TargetProcess.CloseMainWindow()| Out-Null
                 $TargetProcess = $null
@@ -41,7 +51,11 @@ while (1) {
     else {
         $Count = 0
         $TargetProcess = $ForeWindow
-        Write-Host "$($ForeWindow.ProcessName) is Target"
+        if ($Debug) {
+            Write-Host "$($ForeWindow.ProcessName) is Target"
+        }else {
+            Write-Host "$($ForeWindow.ProcessName) is Target" | Out-File $LogFile
+        }
     }
     Start-Sleep -Seconds ($WaitTime / $Split)
 }
