@@ -1,6 +1,6 @@
 param(
-    [string]$Prompt = 'メッセージ',
-    [string]$Title  = '通知',
+    [string]$Prompt = '���b�Z�[�W',
+    [string]$Title  = '�ʒm',
     $CallBack = ''
 )
 
@@ -8,8 +8,8 @@ Add-Type -AssemblyName System.Windows.Forms, System.Drawing
 
 function Show-NotifyIcon {
     param(
-        [string]$Prompt = 'メッセージ',
-        [string]$Title  = '通知',
+        [string]$Prompt = '���b�Z�[�W',
+        [string]$Title  = '�ʒm',
         [scriptblock]$CallBack = {}
     )
     
@@ -23,17 +23,17 @@ function Show-NotifyIcon {
             Visible = $true
         }
     
-    # イベント定義
+    # �C�x���g��`
     $notifyIcon.add_BalloonTipClicked( $CallBack )
     
-    [int]$timeout = 3 # sec
+    [int]$timeout = 10 # sec
 
     [DateTimeOffset]$finishTime = 
         [DateTimeOffset]::UtcNow.AddSeconds( $timeout )
 
     $notifyIcon.ShowBalloonTip( $timeout )
     
-    # そのままだとイベントが走らない＆すぐに消えてしまうので適当wait
+    # ���̂܂܂��ƃC�x���g������Ȃ��������ɏ����Ă��܂��̂œK��wait
     while ( [DateTimeOffset]::UtcNow -lt $finishTime ) {
         Start-Sleep -Milliseconds 1
     }
