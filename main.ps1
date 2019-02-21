@@ -1,13 +1,16 @@
-$TargetProcessName = "CNEXT"
-$Split = 90
-$WaitTime = 900
+# $TargetProcessName = "CNEXT"
+# $Split = 90
+# $WaitTime = 900
+$TargetProcessName = "mspaint"
+$Split = 5
+$WaitTime = 5
 $code = @'
     [DllImport("user32.dll")]
     public static extern IntPtr GetForegroundWindow();
 '@
 Add-Type $code -Name Utils -Namespace Win32
 $Count = 0
-
+$TargetProcess = $null
 while (1) {
     $hwnd = [Win32.Utils]::GetForegroundWindow()
     $ProsessList = Get-Process
@@ -23,6 +26,8 @@ while (1) {
             Write-Host "Let's Kill"
             if ($null -ne $TargetProcess) {
                 $TargetProcess.CloseMainWindow()| Out-Null
+                $TargetProcess = $null
+                . .\toast.ps1 "CATIA was not used for a while!" "CATIA KILLER"
             }
             $Count = 0 
         }
@@ -33,4 +38,8 @@ while (1) {
         Write-Host "$($ForeWindow.ProcessName) is Target"
     }
     Start-Sleep -Seconds ($WaitTime / $Split)
+}
+
+function fff {
+    Start-Process .\test.html
 }
