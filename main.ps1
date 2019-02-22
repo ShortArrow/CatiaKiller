@@ -27,6 +27,9 @@ while (1) {
         if ($item.MainWindowHandle -eq $hwnd) {
             $ForeWindow = $item
         }
+        if ($item.ProcessName -eq $TargetProcessName) {
+            $TargetProcess = $item
+        }
     }
     if ($ForeWindow.ProcessName -ne $TargetProcessName) {
         $Count++
