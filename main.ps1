@@ -42,6 +42,7 @@ while (1) {
         if ($Count -eq $Split) {
             if ($Debug) {
                 Write-Host "Let's Kill"
+                Get-Date
             }
             else {
                 Write-Output "Let's Kill" | Out-File -LiteralPath $LogFile -Append -Force
