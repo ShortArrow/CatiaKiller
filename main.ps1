@@ -54,7 +54,7 @@ while (1) {
                 }
                 $TargetProcess.CloseMainWindow()| Out-Null
                 $TargetProcess = $null
-                . .\toast.ps1 "CATIA was not used for a while!" "CATIA KILLER"
+                # . .\toast.ps1 "CATIA was not used for a while!" "CATIA KILLER"
             }
             else {
                 if ($Debug) {
