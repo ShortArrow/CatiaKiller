@@ -40,18 +40,25 @@ while (1) {
             Write-Output "$Count : $($ForeWindow.ProcessName)" | Out-File -LiteralPath $LogFile -Append -Force
         }
         if ($Count -eq $Split) {
-            if ($Debug) {
-                Write-Host "Let's Kill"
-                Get-Date
-            }
-            else {
-                Write-Output "Let's Kill" | Out-File -LiteralPath $LogFile -Append -Force
-                Get-Date | Out-File -LiteralPath $LogFile -Append -Force
-            }
             if ($null -ne $TargetProcess) {
+                if ($Debug) {
+                    Write-Host "Let's Kill"
+                    Get-Date
+                }
+                else {
+                    Write-Output "Let's Kill" | Out-File -LiteralPath $LogFile -Append -Force
+                    Get-Date | Out-File -LiteralPath $LogFile -Append -Force
+                }
                 $TargetProcess.CloseMainWindow()| Out-Null
                 $TargetProcess = $null
                 . .\toast.ps1 "CATIA was not used for a while!" "CATIA KILLER"
+            }
+            else {
+                if ($Debug) {
+                    Write-Host "No Need To Kill"
+                }else {
+                    Write-Output "No Need To Kill" | Out-File -LiteralPath $LogFile -Append -Force
+                }
             }
             $Count = 0 
         }
