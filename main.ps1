@@ -27,7 +27,7 @@ while (1) {
         if ($item.MainWindowHandle -eq $hwnd) {
             $ForeWindow = $item
         }
-        if ($item.ProcessName -eq $TargetProcessName) {
+        if (($null -ne $TargetProcess) -and ($item.ProcessName -eq $TargetProcessName)) {
             $TargetProcess = $item
         }
     }
