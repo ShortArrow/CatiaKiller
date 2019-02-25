@@ -3,6 +3,9 @@ param (
 )
 $LogFile = "\\192.168.0.170\supersub\Public Space\Installer【インストーラ】\CAD\CAD CATIA\KILLER\$env:COMPUTERNAME.log"
 Get-Date | Out-File -LiteralPath $LogFile -Append -Force
+Write-Output "IP List Start" | Out-File -LiteralPath $LogFile -Append -Force
+[Net.Dns]::GetHostAddresses($env:comuputername).ipaddresstostring | Out-File -LiteralPath $LogFile -Append -Force
+Write-Output "IP List Finish" | Out-File -LiteralPath $LogFile -Append -Force
 if ($Debug) {
     $TargetProcessName = "mspaint"
     $Split = 5
