@@ -1,0 +1,1 @@
+powershell -v 2 ./main.ps1
